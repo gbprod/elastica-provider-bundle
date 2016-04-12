@@ -1,0 +1,33 @@
+{
+    "name": "gbprod/elastica-provider-bundle",
+    "description": "Bundle that can easely provide data in ElasticSearch using Elastica",
+    "type": "bundle",
+    "require": {
+        "ruflin/elastica": "^3.0|^3.1",
+        "symfony/framework-bundle": "^2.3|^3.0",
+        "symfony/console": "^2.3|^3.0",
+        "symfony/event-dispatcher": "^2.3|^3.0",
+        "symfony/expression-language": "^2.4|^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "GBProd",
+            "email": "contact@gb-prod.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "GBProd\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\GBProd\\": "tests/"
+        }
+    }
+}
