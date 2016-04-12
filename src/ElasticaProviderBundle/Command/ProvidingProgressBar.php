@@ -23,6 +23,11 @@ class ProvidingProgressBar
      * @var OutputInterface
      */
     private $output;
+    
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
 
     /**
      * @var ProgressBar
@@ -39,27 +44,18 @@ class ProvidingProgressBar
         EventDispatcherInterface $dispatcher,
         OutputInterface $output
     ) {
-        $this->output = $output;
-
-        $dispatcher->addListener(
-            'elasticsearch.has_started_handling',
-            [$this, 'onStartedHandling']
-        );
-
-        $dispatcher->addListener(
-            'elasticsearch.has_started_providing',
-            [$this, 'onStartedProviding']
-        );
-
-        $dispatcher->addListener(
-            'elasticsearch.has_provided_document',
-            [$this, 'onProvidedDocument']
-        );
-
-        $dispatcher->addListener(
-            'elasticsearch.has_finished_providing',
-            [$this, 'onFinishedProviding']
-        );
+        $this->output     = $output;
+        $this->dispatcher = $dispatcher;
+        
+        $this->listen('elasticsearch.has_started_handling', 'onStartedHandling');
+        $this->listen('elasticsearch.has_started_providing', 'onStartedProviding');
+        $this->listen('elasticsearch.has_provided_document', 'onProvidedDocument');
+        $this->listen('elasticsearch.has_finished_providing', 'onFinishedProviding');
+    }
+    
+    private function listen($eventName, $function)
+    {
+        $this->dispatcher->addListener($eventName, [$this, $function]);
     }
 
     public function onStartedHandling(HasStartedHandling $event)
