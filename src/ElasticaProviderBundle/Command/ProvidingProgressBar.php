@@ -23,7 +23,7 @@ class ProvidingProgressBar
      * @var OutputInterface
      */
     private $output;
-    
+
     /**
      * @var EventDispatcherInterface
      */
@@ -46,13 +46,13 @@ class ProvidingProgressBar
     ) {
         $this->output     = $output;
         $this->dispatcher = $dispatcher;
-        
+
         $this->listen('elasticsearch.has_started_handling', 'onStartedHandling');
         $this->listen('elasticsearch.has_started_providing', 'onStartedProviding');
         $this->listen('elasticsearch.has_provided_document', 'onProvidedDocument');
         $this->listen('elasticsearch.has_finished_providing', 'onFinishedProviding');
     }
-    
+
     private function listen($eventName, $function)
     {
         $this->dispatcher->addListener($eventName, [$this, $function]);
@@ -93,7 +93,10 @@ class ProvidingProgressBar
 
     public function onFinishedProviding(HasFinishedProviding $event)
     {
-        $this->progressBar->finish();
+        if ($this->progressBar) {
+            $this->progressBar->finish();
+        }
+
         $this->output->writeln('');
         $this->progressBar = null;
     }

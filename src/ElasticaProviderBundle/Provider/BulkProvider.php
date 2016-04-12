@@ -80,7 +80,9 @@ abstract class BulkProvider implements Provider
 
     private function commit()
     {
-        $this->flushBulk();
+        if ($this->hasBulk()) {
+            $this->flushBulk();
+        }
 
         $this->client->refreshAll();
     }
@@ -135,7 +137,13 @@ abstract class BulkProvider implements Provider
     private function shouldFlushBulk()
     {
         return $this->currentBulkSize >= $this->bulkSize
-            && $this->currentBulkSize > 0
+            && $this->hasBulk()
+        ;
+    }    
+    
+    private function hasBulk()
+    {
+        return $this->currentBulkSize > 0
         ;
     }
 

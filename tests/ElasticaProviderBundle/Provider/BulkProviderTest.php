@@ -49,19 +49,19 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
     {
         $client = $this->newClientExpectingBulk(
             [
-            'body' =>
-            [
+                'body' =>
                 [
-                    'index' => [
-                        '_index' => 'my_index',
-                        '_type'  => 'my_type',
-                        '_id'    => 'my_id',
+                    [
+                        'index' => [
+                            '_index' => 'my_index',
+                            '_type'  => 'my_type',
+                            '_id'    => 'my_id',
+                        ]
+                    ],
+                    [
+                        'foo' => 'bar',
                     ]
-                ],
-                [
-                    'foo' => 'bar',
                 ]
-            ]
             ]
         );
 
