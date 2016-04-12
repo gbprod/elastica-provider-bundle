@@ -26,7 +26,7 @@ class ProviderCompilerPass implements CompilerPassInterface
         }
 
         $registry = $container->getDefinition('gbprod.elastica_provider.registry');
-        $providers = $container->findTaggedServiceIds('elasticsearch.provider');
+        $providers = $container->findTaggedServiceIds('elastica.provider');
 
         foreach ($providers as $providerId => $tags) {
             $this->processProvider($container, $registry, $providerId, $tags);

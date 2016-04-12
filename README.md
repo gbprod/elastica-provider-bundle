@@ -105,7 +105,7 @@ services:
     acme_bundle.superhero_provider:
         class: GBProd\AcmeBundle\Provider\SuperHeroprovider
         tags:
-            - { name: elasticsearch.provider, index: app, type: superheros }
+            - { name: elastica.provider, index: app, type: superheros }
 ```
 
 ### Provide
@@ -189,7 +189,7 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
         tags:
-            - { name: elasticsearch.provider, index: app, type: superheros }
+            - { name: elastica.provider, index: app, type: superheros }
 ```
 
 ### Changing bulk size
@@ -206,7 +206,7 @@ services:
         calls:
             - ['changeBulkSize', 42]
         tags:
-            - { name: elasticsearch.provider, index: app, type: superheros }
+            - { name: elastica.provider, index: app, type: superheros }
 ```
 
 Or directly inside a provider.

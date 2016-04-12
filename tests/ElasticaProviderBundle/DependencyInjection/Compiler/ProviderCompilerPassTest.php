@@ -68,7 +68,7 @@ class ProviderCompilerPassTest extends \PHPUnit_Framework_TestCase
         $tag = ['index' => $index, 'type' => $type];
 
         $definition = new Definition(Provider::class);
-        $definition->addTag('elasticsearch.provider', $tag);
+        $definition->addTag('elastica.provider', $tag);
 
         return $definition;
     }
@@ -82,7 +82,7 @@ class ProviderCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $definition = new Definition(\stdClass::class);
         $definition->addTag(
-            'elasticsearch.provider',
+            'elastica.provider',
             ['index' => 'foo', 'type' => 'bar']
         );
 
@@ -105,7 +105,7 @@ class ProviderCompilerPassTest extends \PHPUnit_Framework_TestCase
 
         $definition = new Definition(Provider::class);
         $definition->addTag(
-            'elasticsearch.provider',
+            'elastica.provider',
             ['type' => 'my-type']
         );
 
