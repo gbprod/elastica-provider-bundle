@@ -68,7 +68,7 @@ abstract class BulkProvider implements Provider
         $this->dispatcher = $dispatcher;
 
         $this->currentBulkSize = 0;
-        $this->currentBulk     = ['body' => []];
+        $this->currentBulk     = [];
     }
 
     /**
@@ -112,7 +112,7 @@ abstract class BulkProvider implements Provider
 
     private function addBulkData($action, $id, array $body = null)
     {
-        $this->currentBulk['body'][] = [
+        $this->currentBulk[] = [
             $action => [
                 '_index' => $this->index,
                 '_type'  => $this->type,
@@ -121,7 +121,7 @@ abstract class BulkProvider implements Provider
         ];
 
         if (null !== $body) {
-            $this->currentBulk['body'][] = $body;
+            $this->currentBulk[] = $body;
         }
     }
 
@@ -152,7 +152,7 @@ abstract class BulkProvider implements Provider
         $this->client->bulk($this->currentBulk);
 
         $this->currentBulkSize = 0;
-        $this->currentBulk     = ['body' => []];
+        $this->currentBulk     = [];
     }
 
 

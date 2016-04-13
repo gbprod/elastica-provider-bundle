@@ -49,18 +49,15 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
     {
         $client = $this->newClientExpectingBulk(
             [
-                'body' =>
                 [
-                    [
-                        'index' => [
-                            '_index' => 'my_index',
-                            '_type'  => 'my_type',
-                            '_id'    => 'my_id',
-                        ]
-                    ],
-                    [
-                        'foo' => 'bar',
+                    'index' => [
+                        '_index' => 'my_index',
+                        '_type'  => 'my_type',
+                        '_id'    => 'my_id',
                     ]
+                ],
+                [
+                    'foo' => 'bar',
                 ]
             ]
         );
@@ -147,15 +144,12 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         $bulk = [
-            'body' =>
-            [
             [
                 'delete' => [
                     '_index' => 'my_index',
                     '_type'  => 'my_type',
                     '_id'    => 'my_id',
                 ]
-            ]
             ]
         ];
 
@@ -193,8 +187,6 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
     {
         $client = $this->newClientExpectingBulk(
             [
-            'body' =>
-            [
                 [
                     'create' => [
                         '_index' => 'my_index',
@@ -205,7 +197,6 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
                 [
                     'foo' => 'bar',
                 ]
-            ]
             ]
         );
 
@@ -222,21 +213,17 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         $client = $this->newClientExpectingBulk(
-          [
-              'body' =>
-              [
-                  [
-                     'update' =>
-                     [
-                         '_index' => 'my_index',
-                         '_type'  => 'my_type',
-                         '_id'    => 'my_id',
-                     ]
-                  ],
-                  [
-                     'doc' => ['foo' => 'bar'],
-                  ]
-              ]
+            [
+                [
+                    'update' => [
+                        '_index' => 'my_index',
+                        '_type'  => 'my_type',
+                        '_id'    => 'my_id',
+                   ]
+                ],
+                [
+                    'doc' => ['foo' => 'bar'],
+                ]
             ]
         );
 
