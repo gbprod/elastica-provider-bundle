@@ -59,7 +59,7 @@ class ProvideCommand extends ContainerAwareCommand
 
     private function getClient($clientName)
     {
-        $clientName = $clientName ?: 'gbpord.elastica_provider.default_client';
+        $clientName = $clientName ?: 'gbprod.elastica_provider.default_client';
         
         $client = $this->getContainer()
             ->get(

@@ -75,12 +75,12 @@ class ElasticaProviderExtensionTest extends \PHPUnit_Framework_TestCase
         $this->extension->load($config, $this->container);
         
         $this->assertTrue(
-            $this->container->hasAlias('gbpord.elastica_provider.default_client')
+            $this->container->hasAlias('gbprod.elastica_provider.default_client')
         );
         
         $this->assertEquals(
             'my_client_service',
-            $this->container->getAlias('gbpord.elastica_provider.default_client')
+            $this->container->getAlias('gbprod.elastica_provider.default_client')
         );
     }
 }

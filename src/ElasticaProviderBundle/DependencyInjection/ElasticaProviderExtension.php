@@ -24,7 +24,7 @@ class ElasticaProviderExtension extends Extension
     
         if (null !== $config['default_client']) {
             $container->setAlias(
-                'gbpord.elastica_provider.default_client', 
+                'gbprod.elastica_provider.default_client', 
                 $config['default_client']
             );
         }

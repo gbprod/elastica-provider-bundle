@@ -45,7 +45,7 @@ class ProvideCommandTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-        $container->set('gbpord.elastica_provider.default_client', $this->client);
+        $container->set('gbprod.elastica_provider.default_client', $this->client);
 
         $command->setContainer($container);
     }
