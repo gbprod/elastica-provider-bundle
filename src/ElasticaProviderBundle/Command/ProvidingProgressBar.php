@@ -78,7 +78,7 @@ class ProvidingProgressBar
         ));
 
         $count = $event->getEntry()->getProvider()->count();
-        if (null !== $count) {
+        if (null !== $count && $count > 0) {
             $this->progressBar = new ProgressBar($this->output, $count);
             $this->progressBar->setFormat(self::PROGRESS_BAR_TEMPLATE);
         }

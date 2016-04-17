@@ -82,9 +82,8 @@ abstract class BulkProvider implements Provider
     {
         if ($this->hasBulk()) {
             $this->flushBulk();
+            $this->client->refreshAll();
         }
-
-        $this->client->refreshAll();
     }
 
     /**
