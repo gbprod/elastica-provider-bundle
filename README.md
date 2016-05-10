@@ -3,7 +3,7 @@
 Bundle that can easely provide data in Elasticsearch using [Elastica](http://eastica.io).
 
 [![Build Status](https://travis-ci.org/gbprod/elastica-provider-bundle.svg?branch=master)](https://travis-ci.org/gbprod/elastica-provider-bundle)
-[![Code Coverage](https://scrutinizer-ci.com/g/gbprod/elastica-provider-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/gbprod/elastica-provider-bundle/?branch=master)
+[![codecov](https://codecov.io/gh/gbprod/elastica-provider-bundle/branch/master/graph/badge.svg)](https://codecov.io/gh/gbprod/elastica-provider-bundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gbprod/elastica-provider-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gbprod/elastica-provider-bundle/?branch=master)
 
 [![Latest Stable Version](https://poser.pugx.org/gbprod/elastica-provider-bundle/v/stable)](https://packagist.org/packages/gbprod/elastica-provider-bundle)
