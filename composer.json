@@ -3,7 +3,7 @@
     "description": "Bundle that can easely provide data in ElasticSearch using Elastica",
     "type": "bundle",
     "require": {
-        "ruflin/elastica": "^3.0|^3.1",
+        "ruflin/elastica": "^3.1|^3.2",
         "symfony/framework-bundle": "^2.3|^3.0",
         "symfony/console": "^2.3|^3.0",
         "symfony/event-dispatcher": "^2.3|^3.0",
@@ -29,5 +29,9 @@
         "psr-4": {
             "Tests\\GBProd\\": "tests/"
         }
+    },
+    "suggest": {
+        "gbprod/elastica-bundle": "Really simple bundle to use elastica within Symfony applications.",
+        "gbprod/elastica-extra-bundle": "Bundle providing extra elastica tools for managing indices and types settings."
     }
 }
