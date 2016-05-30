@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased](https://github.com/gbprod/elastica-provider-bundle/compare/v0.1.1...HEAD)
 
 ### Added
+- version eye badge
+
+### Changed
+- Scrutinizer use PSR2 codesniffer
+
+## v0.1.1
+
+### Added
 - Changelog
 - Composer suggestions
 
