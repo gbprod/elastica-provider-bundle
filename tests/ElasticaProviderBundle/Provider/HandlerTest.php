@@ -22,14 +22,9 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = $this
-            ->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-
+        $this->client = $this->prophesize(Client::class);
         $this->registry = new Registry();
-        $this->dispatcher = $this->getMock(EventDispatcherInterface::class);
+        $this->dispatcher = $this->prophesize(EventDispatcherInterface::class);
     }
 
     public function testHandlerRunEveryProviders()
@@ -51,9 +46,9 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
             )
         ;
 
-        $handler = new Handler($this->registry, $this->dispatcher);
+        $handler = new Handler($this->registry, $this->dispatcher->reveal());
 
-        $handler->handle($this->client, 'my_index', null);
+        $handler->handle($this->client->reveal(), 'my_index', null);
     }
 
     /**
@@ -61,14 +56,49 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
      */
     private function createProviderExpectingRun($index, $type)
     {
-        $provider = $this->getMock(Provider::class);
+        $provider = $this->prophesize(Provider::class);
 
         $provider
-            ->expects($this->once())
-            ->method('run')
-            ->with($this->client, $index, $type, $this->dispatcher)
+            ->run($this->client->reveal(), $index, $type, $this->dispatcher->reveal())
+            ->shouldBeCalled()
         ;
 
-        return $provider;
+        return $provider->reveal();
+    }
+
+    public function testHandler()
+    {
+        $this->registry
+            ->add(
+                new RegistryEntry(
+                    $this->createProviderExpectingRun('my_index', 'my_type'),
+                    'my_alias',
+                    'my_type'
+                )
+            )
+            ->add(
+                new RegistryEntry(
+                    $this->createProviderNotExpectingRun('my_index', 'my_type_2'),
+                    'my_alias_2',
+                    'my_type_2'
+                )
+            )
+        ;
+
+        $handler = new Handler($this->registry, $this->dispatcher->reveal());
+
+        $handler->handle($this->client->reveal(), 'my_index', null, 'my_alias');
+    }
+
+    private function createProviderNotExpectingRun($index, $type)
+    {
+        $provider = $this->prophesize(Provider::class);
+
+        $provider
+            ->run($this->client->reveal(), $index, $type, $this->dispatcher->reveal())
+            ->shouldNotBeCalled()
+        ;
+
+        return $provider->reveal();
     }
 }

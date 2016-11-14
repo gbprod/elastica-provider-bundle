@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - version eye badge
+- Possibility to set a different index (for alias usage)
 
 ### Changed
 - Scrutinizer use PSR2 codesniffer

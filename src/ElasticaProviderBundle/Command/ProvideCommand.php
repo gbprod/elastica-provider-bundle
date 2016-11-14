@@ -28,6 +28,7 @@ class ProvideCommand extends ContainerAwareCommand
             ->addArgument('index', InputArgument::OPTIONAL, 'Index to provide')
             ->addArgument('type', InputArgument::OPTIONAL, 'Type to provide')
             ->addOption('client', null, InputOption::VALUE_REQUIRED, 'Client to use (if not default)', null)
+            ->addOption('alias', null, InputOption::VALUE_REQUIRED, 'Alias to use instead of index name for providers (index is required to use this option)', null)
         ;
     }
 
@@ -36,14 +37,13 @@ class ProvideCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $handler = $this->getContainer()
-            ->get('gbprod.elastica_provider.handler')
-        ;
+        $handler = $this->getContainer()->get('gbprod.elastica_provider.handler');
 
         $client = $this->getClient($input->getOption('client'));
 
         $index = $input->getArgument('index');
         $type  = $input->getArgument('type');
+        $alias = (null != $index) ? $input->getOption('alias') : null; // alias usage only if index is set
 
         $output->writeln(sprintf(
             '<info>Providing <comment>%s/%s</comment> for client <comment>%s</comment></info>',
@@ -54,19 +54,14 @@ class ProvideCommand extends ContainerAwareCommand
 
         $this->initializeProgress($output);
 
-        $handler->handle($client, $index, $type);
+        $handler->handle($client, $index, $type, $alias);
     }
 
     private function getClient($clientName)
     {
         $clientName = $clientName ?: 'gbprod.elastica_provider.default_client';
-        
-        $client = $this->getContainer()
-            ->get(
-                $clientName,
-                ContainerInterface::NULL_ON_INVALID_REFERENCE
-            )
-        ;
+
+        $client = $this->getContainer()->get($clientName, ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
         if (!$client) {
             throw new \InvalidArgumentException(sprintf(

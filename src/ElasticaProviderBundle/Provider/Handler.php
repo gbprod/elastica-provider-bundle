@@ -29,10 +29,8 @@ class Handler
      * @param Registry                      $registry
      * @param EventDispatcherInterface|null $dispatcher
      */
-    public function __construct(
-        Registry $registry,
-        EventDispatcherInterface $dispatcher = null
-    ) {
+    public function __construct(Registry $registry, EventDispatcherInterface $dispatcher = null)
+    {
         $this->registry   = $registry;
         $this->dispatcher = $dispatcher;
     }
@@ -40,9 +38,11 @@ class Handler
     /**
      * Handle provide command
      */
-    public function handle(Client $client, $index, $type)
+    public function handle(Client $client, $index, $type, $alias = null)
     {
-        $entries = $this->registry->get($index, $type);
+        $alias = $alias ?: $index;
+
+        $entries = $this->registry->get($alias, $type);
 
         $this->dispatchHandlingStartedEvent($entries);
 
@@ -51,7 +51,7 @@ class Handler
 
             $entry->getProvider()->run(
                 $client,
-                $entry->getIndex(),
+                $index,
                 $entry->getType(),
                 $this->dispatcher
             );
