@@ -3,7 +3,7 @@
     "description": "Bundle that can easely provide data in ElasticSearch using Elastica",
     "type": "bundle",
     "require": {
-        "ruflin/elastica": "^3.1|^3.2",
+        "ruflin/elastica": "^3.2|^5.0",
         "symfony/framework-bundle": "^2.3|^3.0",
         "symfony/console": "^2.3|^3.0",
         "symfony/event-dispatcher": "^2.3|^3.0",

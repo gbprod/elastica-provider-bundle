@@ -59,7 +59,7 @@ namespace GBProd\AcmeBundle\Provider;
 
 use GBProd\ElasticaProviderBundle\Provider\BulkProvider;
 
-class SuperHeroprovider extends BulkProvider
+class SuperHeroProvider extends BulkProvider
 {
     protected function populate()
     {

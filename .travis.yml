@@ -1,18 +1,16 @@
 language: php
 php:
-  - '5.5'
   - '5.6'
   - '7.0'
+  - '7.1'
 
 env:
-    - SYMFONY_VERSION=2.3.* ELASTICA_VERSION=3.1.*
-    - SYMFONY_VERSION=2.7.* ELASTICA_VERSION=3.1.*
-    - SYMFONY_VERSION=2.8.* ELASTICA_VERSION=3.1.*
-    - SYMFONY_VERSION=3.0.* ELASTICA_VERSION=3.1.*
-    - SYMFONY_VERSION=2.3.* ELASTICA_VERSION=3.2.*
     - SYMFONY_VERSION=2.7.* ELASTICA_VERSION=3.2.*
     - SYMFONY_VERSION=2.8.* ELASTICA_VERSION=3.2.*
     - SYMFONY_VERSION=3.0.* ELASTICA_VERSION=3.2.*
+    - SYMFONY_VERSION=2.7.* ELASTICA_VERSION=5.0.*
+    - SYMFONY_VERSION=2.8.* ELASTICA_VERSION=5.0.*
+    - SYMFONY_VERSION=3.0.* ELASTICA_VERSION=5.0.*
 
 before_script:
     - composer self-update
@@ -20,9 +18,9 @@ before_script:
     - composer require ruflin/elastica:${ELASTICA_VERSION} --no-update
     - composer update
 
-script: 
+script:
     - vendor/bin/phpunit --coverage-clover=coverage.clover
-    
+
 after_success:
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

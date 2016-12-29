@@ -138,12 +138,11 @@ abstract class BulkProvider implements Provider
         return $this->currentBulkSize >= $this->bulkSize
             && $this->hasBulk()
         ;
-    }    
-    
+    }
+
     private function hasBulk()
     {
-        return $this->currentBulkSize > 0
-        ;
+        return $this->currentBulkSize > 0;
     }
 
     private function flushBulk()
