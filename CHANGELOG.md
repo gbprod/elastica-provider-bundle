@@ -2,7 +2,15 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/gbprod/elastica-provider-bundle/compare/v0.1.1...HEAD)
+## [Unreleased](https://github.com/gbprod/elastica-provider-bundle/compare/v0.2.0...HEAD)
+
+### Changed
+
+- Drop Symfony 2.3 support
+- Add Elastica 5.0 support
+- PHPUnit upgrade
+
+## [v0.2.0](https://github.com/gbprod/elastica-provider-bundle/compare/v0.1.1...v0.2.0)
 
 ### Added
 
@@ -12,8 +20,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Scrutinizer use PSR2 codesniffer
-- Drop Symfony 2.3 support
-- Add Elastica 5.0 support
 
 ## v0.1.1
 

@@ -33,7 +33,7 @@ class ProvideCommandTest extends \PHPUnit_Framework_TestCase
 
         $container = new Container();
         $container->set('gbprod.elastica_provider.handler', $this->handler->reveal());
-        $container->set('event_dispatcher', $this->getMock(EventDispatcherInterface::class));
+        $container->set('event_dispatcher', $this->prophesize(EventDispatcherInterface::class)->reveal());
 
         $this->client = $this->prophesize(Client::class);
 

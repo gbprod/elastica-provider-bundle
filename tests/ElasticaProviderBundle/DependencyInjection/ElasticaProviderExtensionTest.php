@@ -28,7 +28,7 @@ class ElasticaProviderExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->container->set(
             'event_dispatcher',
-            $this->getMock(EventDispatcherInterface::class)
+            $this->createMock(EventDispatcherInterface::class)
         );
 
     }
@@ -40,7 +40,7 @@ class ElasticaProviderExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
-        
+
         $this->assertTrue(
             $this->container->has($serviceId)
         );
@@ -63,7 +63,7 @@ class ElasticaProviderExtensionTest extends \PHPUnit_Framework_TestCase
             ],
         ];
     }
-    
+
     public function testSetAliasForDefaultClient()
     {
         $config = [
@@ -71,13 +71,13 @@ class ElasticaProviderExtensionTest extends \PHPUnit_Framework_TestCase
                 'default_client' => 'my_client_service',
             ]
         ];
-        
+
         $this->extension->load($config, $this->container);
-        
+
         $this->assertTrue(
             $this->container->hasAlias('gbprod.elastica_provider.default_client')
         );
-        
+
         $this->assertEquals(
             'my_client_service',
             $this->container->getAlias('gbprod.elastica_provider.default_client')

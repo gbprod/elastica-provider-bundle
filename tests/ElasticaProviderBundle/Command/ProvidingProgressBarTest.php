@@ -28,24 +28,24 @@ class ProvidingProgressBarTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->dispatcher = $this->getMock(EventDispatcherInterface::class);
-        $this->consoleOutput = $this->getMock(OutputInterface::class);
+        $this->dispatcher = $this->createMock(EventDispatcherInterface::class);
+        $this->consoleOutput = $this->createMock(OutputInterface::class);
 
         $this->testedInstance = new ProvidingProgressBar(
             $this->dispatcher,
             $this->consoleOutput
         );
 
-        $this->provider = $this->getMock(Provider::class);
+        $this->provider = $this->createMock(Provider::class);
         $this->entry = new RegistryEntry($this->provider, 'my_index', 'my_type');
     }
 
     public function testOnStartedHandlingDisplayNumberOfEntries()
     {
         $event = new HasStartedHandling([
-            $this->getMock(Provider::class),
-            $this->getMock(Provider::class),
-            $this->getMock(Provider::class),
+            $this->createMock(Provider::class),
+            $this->createMock(Provider::class),
+            $this->createMock(Provider::class),
         ]);
 
         $this
@@ -108,7 +108,7 @@ class ProvidingProgressBarTest extends \PHPUnit_Framework_TestCase
     private function setProvressBarExpectsMethod($method)
     {
         $this->testedInstance->progressBar = $this
-            ->getMock(ProgressBar::class, [], [$this->consoleOutput])
+            ->createMock(ProgressBar::class, [], [$this->consoleOutput])
         ;
 
         $this->testedInstance

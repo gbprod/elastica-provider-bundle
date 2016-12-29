@@ -14,7 +14,7 @@ class RegistryEntryTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetProvidersEmptyIfNoProviders()
     {
-        $provider = $this->getMock(Provider::class);
+        $provider = $this->createMock(Provider::class);
 
         $testedInstance = new RegistryEntry(
             $provider,
@@ -40,7 +40,7 @@ class RegistryEntryTest extends \PHPUnit_Framework_TestCase
     public function testMatch()
     {
        $testedInstance = new RegistryEntry(
-            $this->getMock(Provider::class),
+            $this->createMock(Provider::class),
             'my_index',
             'my_type'
         );

@@ -23,7 +23,7 @@ class ElasticaProviderBundleTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildAddCompilerPass()
     {
-        $container = $this->getMock(ContainerBuilder::class);
+        $container = $this->createMock(ContainerBuilder::class);
         $container
             ->expects($this->once())
             ->method('addCompilerPass')

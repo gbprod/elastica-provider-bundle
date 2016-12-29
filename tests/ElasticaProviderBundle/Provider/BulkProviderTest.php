@@ -27,13 +27,13 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
             $this->getClient('index'),
             'index',
             'type',
-            $this->getMock(EventDispatcherInterface::class)
+            $this->createMock(EventDispatcherInterface::class)
         );
     }
 
     /**
      * @return Client
-     */   
+     */
     private function getClient($index)
     {
         $client = $this
@@ -82,7 +82,7 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
             $client,
             'my_index',
             'my_type',
-            $this->getMock(EventDispatcherInterface::class)
+            $this->createMock(EventDispatcherInterface::class)
         );
     }
 
@@ -130,7 +130,7 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
             $client,
             'my_index',
             'my_type',
-            $this->getMock(EventDispatcherInterface::class)
+            $this->createMock(EventDispatcherInterface::class)
         );
     }
 
@@ -161,7 +161,7 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
             $client,
             'my_index',
             'my_type',
-            $this->getMock(EventDispatcherInterface::class)
+            $this->createMock(EventDispatcherInterface::class)
         );
     }
 
@@ -206,7 +206,7 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
             $client,
             'my_index',
             'my_type',
-            $this->getMock(EventDispatcherInterface::class)
+            $this->createMock(EventDispatcherInterface::class)
         );
     }
 
@@ -233,7 +233,7 @@ class BulkProviderTest extends \PHPUnit_Framework_TestCase
             $client,
             'my_index',
             'my_type',
-            $this->getMock(EventDispatcherInterface::class)
+            $this->createMock(EventDispatcherInterface::class)
         );
     }
 }
