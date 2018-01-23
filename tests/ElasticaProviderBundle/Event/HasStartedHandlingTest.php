@@ -4,13 +4,14 @@ namespace Tests\GBProd\ElasticaProviderBundle\Event;
 
 use GBProd\ElasticaProviderBundle\Event\HasStartedHandling;
 use GBProd\ElasticaProviderBundle\Provider\RegistryEntry;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for HasStartedHandling
  * 
  * @author gbprod <contact@gb-prod.fr>
  */
-class HasStartedHandlingTest extends \PHPUnit_Framework_TestCase
+class HasStartedHandlingTest extends TestCase
 {
     public function testConstruction()
     {

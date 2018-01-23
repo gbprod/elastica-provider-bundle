@@ -7,6 +7,7 @@ use GBProd\ElasticaProviderBundle\Provider\Provider;
 use GBProd\ElasticaProviderBundle\Provider\Handler;
 use GBProd\ElasticaProviderBundle\Provider\Registry;
 use GBProd\ElasticaProviderBundle\Provider\RegistryEntry;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -14,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class HandlerTest extends \PHPUnit_Framework_TestCase
+class HandlerTest extends TestCase
 {
     private $client;
     private $registry;

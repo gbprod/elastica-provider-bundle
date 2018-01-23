@@ -5,6 +5,7 @@ namespace Tests\GBProd\ElasticaProviderBundle\DependencyInjection;
 use GBProd\ElasticaProviderBundle\Provider\Handler;
 use GBProd\ElasticaProviderBundle\Provider\Registry;
 use GBProd\ElasticaProviderBundle\DependencyInjection\ElasticaProviderExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -13,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class ElasticaProviderExtensionTest extends \PHPUnit_Framework_TestCase
+class ElasticaProviderExtensionTest extends TestCase
 {
     private $extension;
 

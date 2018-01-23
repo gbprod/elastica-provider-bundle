@@ -4,6 +4,7 @@ namespace Tests\GBProd\ElasticaProviderBundle;
 
 use GBProd\ElasticaProviderBundle\DependencyInjection\Compiler\ProviderCompilerPass;
 use GBProd\ElasticaProviderBundle\ElasticaProviderBundle;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -11,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class ElasticaProviderBundleTest extends \PHPUnit_Framework_TestCase
+class ElasticaProviderBundleTest extends TestCase
 {
     public function testConstruct()
     {
@@ -27,7 +28,7 @@ class ElasticaProviderBundleTest extends \PHPUnit_Framework_TestCase
         $container
             ->expects($this->once())
             ->method('addCompilerPass')
-            ->with($this->isInstanceOf(providerCompilerPass::class))
+            ->with($this->isInstanceOf(ProviderCompilerPass::class))
         ;
 
         $bundle = new ElasticaProviderBundle();

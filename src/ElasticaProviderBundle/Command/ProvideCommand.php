@@ -2,13 +2,15 @@
 
 namespace GBProd\ElasticaProviderBundle\Command;
 
+use Elastica\Client;
+use GBProd\ElasticaProviderBundle\Provider\Handler;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Command to run providing
@@ -17,6 +19,26 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class ProvideCommand extends ContainerAwareCommand
 {
+    /**
+     * @var Handler
+     */
+    private $handler;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    public function __construct(
+        Handler $handler,
+        EventDispatcherInterface $eventDispatcher
+    )
+    {
+        parent::__construct();
+        $this->handler = $handler;
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -27,8 +49,8 @@ class ProvideCommand extends ContainerAwareCommand
             ->setDescription('Provide data to Elasticsearch')
             ->addArgument('index', InputArgument::OPTIONAL, 'Index to provide')
             ->addArgument('type', InputArgument::OPTIONAL, 'Type to provide')
-            ->addOption('client', null, InputOption::VALUE_REQUIRED, 'Client to use (if not default)', null)
-            ->addOption('alias', null, InputOption::VALUE_REQUIRED, 'Alias to use instead of index name for providers (index is required to use this option)', null)
+            ->addOption('client', null, InputOption::VALUE_REQUIRED, 'Client to use (if not default)')
+            ->addOption('alias', null, InputOption::VALUE_REQUIRED, 'Alias to use instead of index name for providers (index is required to use this option)')
         ;
     }
 
@@ -37,13 +59,11 @@ class ProvideCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $handler = $this->getContainer()->get('gbprod.elastica_provider.handler');
-
         $client = $this->getClient($input->getOption('client'));
 
         $index = $input->getArgument('index');
         $type  = $input->getArgument('type');
-        $alias = (null != $index) ? $input->getOption('alias') : null; // alias usage only if index is set
+        $alias = (null !== $index) ? $input->getOption('alias') : null; // alias usage only if index is set
 
         $output->writeln(sprintf(
             '<info>Providing <comment>%s/%s</comment> for client <comment>%s</comment></info>',
@@ -54,13 +74,19 @@ class ProvideCommand extends ContainerAwareCommand
 
         $this->initializeProgress($output);
 
-        $handler->handle($client, $index, $type, $alias);
+        $this->handler->handle($client, $index, $type, $alias);
     }
 
+    /**
+     * @param string $clientName
+     *
+     * @return Client
+     */
     private function getClient($clientName)
     {
         $clientName = $clientName ?: 'gbprod.elastica_provider.default_client';
 
+        /** @var Client $client */
         $client = $this->getContainer()->get($clientName, ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
         if (!$client) {
@@ -75,8 +101,6 @@ class ProvideCommand extends ContainerAwareCommand
 
     private function initializeProgress(OutputInterface $output)
     {
-        $dispatcher = $this->getContainer()->get('event_dispatcher');
-
-        new ProvidingProgressBar($dispatcher, $output);
+        new ProvidingProgressBar($this->eventDispatcher, $output);
     }
 }

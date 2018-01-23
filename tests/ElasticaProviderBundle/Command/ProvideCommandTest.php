@@ -5,6 +5,8 @@ namespace Tests\GBProd\ElasticaProviderBundle\Command;
 use Elastica\Client;
 use GBProd\ElasticaProviderBundle\Command\ProvideCommand;
 use GBProd\ElasticaProviderBundle\Provider\Handler;
+use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\Container;
@@ -15,28 +17,42 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class ProvideCommandTest extends \PHPUnit_Framework_TestCase
+class ProvideCommandTest extends TestCase
 {
+    /**
+     * @var CommandTester
+     */
     private $commandTester;
+
+    /**
+     * @var Handler|ObjectProphecy
+     */
     private $handler;
+
+    /**
+     * @var EventDispatcherInterface|ObjectProphecy
+     */
+    private $dispatcher;
+
+    /**
+     * @var Client|ObjectProphecy
+     */
     private $client;
 
     public function setUp()
     {
         $application = new Application();
-        $application->add(new ProvideCommand());
+
+        $this->handler = $this->prophesize(Handler::class);
+        $this->dispatcher = $this->prophesize(EventDispatcherInterface::class);
+
+        $application->add(new ProvideCommand($this->handler->reveal(), $this->dispatcher->reveal()));
 
         $command = $application->find('elasticsearch:provide');
         $this->commandTester = new CommandTester($command);
 
-        $this->handler = $this->prophesize(Handler::class);
-
         $container = new Container();
-        $container->set('gbprod.elastica_provider.handler', $this->handler->reveal());
-        $container->set('event_dispatcher', $this->prophesize(EventDispatcherInterface::class)->reveal());
-
         $this->client = $this->prophesize(Client::class);
-
         $container->set('gbprod.elastica_provider.default_client', $this->client->reveal());
 
         $command->setContainer($container);
@@ -58,7 +74,7 @@ class ProvideCommandTest extends \PHPUnit_Framework_TestCase
 
     public function testExecuteThrowExceptionIfClientNotFound()
     {
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->commandTester->execute([
             'command'  => 'elasticsearch:provide',

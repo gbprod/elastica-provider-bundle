@@ -4,13 +4,14 @@ namespace Tests\GBProd\ElasticaProviderBundle\Provider;
 
 use GBProd\ElasticaProviderBundle\Provider\Registry;
 use GBProd\ElasticaProviderBundle\Provider\RegistryEntry;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for provider registry
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class RegistryTest extends \PHPUnit_Framework_TestCase
+class RegistryTest extends TestCase
 {
     private $testedInstance;
 

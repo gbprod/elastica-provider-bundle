@@ -4,13 +4,14 @@ namespace Tests\GBProd\ElasticaProviderBundle\Provider;
 
 use GBProd\ElasticaProviderBundle\Provider\RegistryEntry;
 use GBProd\ElasticaProviderBundle\Provider\Provider;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for provider registry entry
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class RegistryEntryTest extends \PHPUnit_Framework_TestCase
+class RegistryEntryTest extends TestCase
 {
     public function testGetProvidersEmptyIfNoProviders()
     {

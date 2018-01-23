@@ -5,6 +5,7 @@ namespace Tests\GBProd\ElasticaProviderBundle\Provider;
 use Elastica\Client;
 use Elasticsearch\Namespaces\IndicesNamespace;
 use GBProd\ElasticaProviderBundle\Provider\BulkProvider;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class BulkProviderTest extends \PHPUnit_Framework_TestCase
+class BulkProviderTest extends TestCase
 {
     public function testRunExecutePopulate()
     {

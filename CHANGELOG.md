@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [v1.0.0](https://github.com/gbprod/elastica-provider-bundle/compare/v1.0.0...HEAD)
 
+### Changed
+
+- PHPUnit upgrade
+- Unit testing working again
+- Removed some deprecations with Symfony >= 3.4 
+
 ## [Unreleased](https://github.com/gbprod/elastica-provider-bundle/compare/v0.2.0...v1.0.0)
 
 ### Changed

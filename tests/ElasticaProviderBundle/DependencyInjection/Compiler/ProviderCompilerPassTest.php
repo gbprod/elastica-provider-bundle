@@ -4,6 +4,7 @@ namespace Tests\GBProd\ElasticaProviderBundle\DependencyInjection\Compiler;
 
 use GBProd\ElasticaProviderBundle\Provider\Provider;
 use GBProd\ElasticaProviderBundle\DependencyInjection\Compiler\ProviderCompilerPass;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -13,7 +14,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author gbprod <contact@gb-prod.fr>
  */
-class ProviderCompilerPassTest extends \PHPUnit_Framework_TestCase
+class ProviderCompilerPassTest extends TestCase
 {
     private $testedInstance;
 
@@ -91,7 +92,7 @@ class ProviderCompilerPassTest extends \PHPUnit_Framework_TestCase
             $definition
         );
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->testedInstance->process($this->container);
     }
@@ -114,7 +115,7 @@ class ProviderCompilerPassTest extends \PHPUnit_Framework_TestCase
             $definition
         );
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->testedInstance->process($this->container);
     }
