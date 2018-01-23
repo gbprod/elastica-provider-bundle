@@ -29,11 +29,14 @@ class ProvideCommand extends ContainerAwareCommand
      */
     private $eventDispatcher;
 
+    /**
+     * @param Handler                  $handler
+     * @param EventDispatcherInterface $eventDispatcher
+     */
     public function __construct(
         Handler $handler,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         parent::__construct();
         $this->handler = $handler;
         $this->eventDispatcher = $eventDispatcher;
@@ -86,8 +89,9 @@ class ProvideCommand extends ContainerAwareCommand
     {
         $clientName = $clientName ?: 'gbprod.elastica_provider.default_client';
 
-        /** @var Client $client */
-        $client = $this->getContainer()->get($clientName, ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        $client = $this->getContainer()
+            ->get($clientName, ContainerInterface::NULL_ON_INVALID_REFERENCE)
+        ;
 
         if (!$client) {
             throw new \InvalidArgumentException(sprintf(

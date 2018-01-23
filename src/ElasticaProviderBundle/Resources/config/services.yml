@@ -1,9 +1,11 @@
 services:
     gbprod.elastica_provider.registry:
         class: GBProd\ElasticaProviderBundle\Provider\Registry
+        public: true
 
     gbprod.elastica_provider.handler:
         class: GBProd\ElasticaProviderBundle\Provider\Handler
         arguments:
             - '@gbprod.elastica_provider.registry'
             - '@event_dispatcher'
+        public: true
