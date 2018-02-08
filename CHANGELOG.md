@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/gbprod/elastica-provider-bundle/compare/v1.1.0...HEAD)
 
+ - Fix unavailable command
+
 ## [v1.1.0](https://github.com/gbprod/elastica-provider-bundle/compare/v1.0.0...v1.1.0)
 
 ### Changed

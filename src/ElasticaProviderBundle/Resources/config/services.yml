@@ -9,3 +9,12 @@ services:
             - '@gbprod.elastica_provider.registry'
             - '@event_dispatcher'
         public: true
+
+    gbprod.elastica_provider.provide_command:
+        class: GBProd\ElasticaProviderBundle\Command\ProvideCommand
+        public: true
+        arguments:
+            - '@gbprod.elastica_provider.handler'
+            - '@event_dispatcher'
+        tags:
+            - { name: console.command }

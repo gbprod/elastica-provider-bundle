@@ -2,9 +2,10 @@
 
 namespace Tests\GBProd\ElasticaProviderBundle\DependencyInjection;
 
+use GBProd\ElasticaProviderBundle\Command\ProvideCommand;
+use GBProd\ElasticaProviderBundle\DependencyInjection\ElasticaProviderExtension;
 use GBProd\ElasticaProviderBundle\Provider\Handler;
 use GBProd\ElasticaProviderBundle\Provider\Registry;
-use GBProd\ElasticaProviderBundle\DependencyInjection\ElasticaProviderExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -62,6 +63,10 @@ class ElasticaProviderExtensionTest extends TestCase
                 'gbprod.elastica_provider.handler',
                 Handler::class,
             ],
+            [
+                'gbprod.elastica_provider.provide_command',
+                ProvideCommand::class,
+            ]
         ];
     }
 
